@@ -1,0 +1,345 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LambdaConfig 1`] = `
+Object {
+  "Parameters": Object {
+    "AssetParametersa01cec960b58c5d4ab37f849b1af75bf2d04efe9541f332a4e67aefb46252909ArtifactHashFBE179D1": Object {
+      "Description": "Artifact hash for asset \\"a01cec960b58c5d4ab37f849b1af75bf2d04efe9541f332a4e67aefb46252909\\"",
+      "Type": "String",
+    },
+    "AssetParametersa01cec960b58c5d4ab37f849b1af75bf2d04efe9541f332a4e67aefb46252909S3Bucket890F81D3": Object {
+      "Description": "S3 bucket for asset \\"a01cec960b58c5d4ab37f849b1af75bf2d04efe9541f332a4e67aefb46252909\\"",
+      "Type": "String",
+    },
+    "AssetParametersa01cec960b58c5d4ab37f849b1af75bf2d04efe9541f332a4e67aefb46252909S3VersionKey268FBFBF": Object {
+      "Description": "S3 key for asset version \\"a01cec960b58c5d4ab37f849b1af75bf2d04efe9541f332a4e67aefb46252909\\"",
+      "Type": "String",
+    },
+    "AssetParametersc82ab631133fcbacba75e34003554476abe4d086d477fe4dc9c98fb25a6e5affArtifactHash3453F7BF": Object {
+      "Description": "Artifact hash for asset \\"c82ab631133fcbacba75e34003554476abe4d086d477fe4dc9c98fb25a6e5aff\\"",
+      "Type": "String",
+    },
+    "AssetParametersc82ab631133fcbacba75e34003554476abe4d086d477fe4dc9c98fb25a6e5affS3Bucket9266BA0E": Object {
+      "Description": "S3 bucket for asset \\"c82ab631133fcbacba75e34003554476abe4d086d477fe4dc9c98fb25a6e5aff\\"",
+      "Type": "String",
+    },
+    "AssetParametersc82ab631133fcbacba75e34003554476abe4d086d477fe4dc9c98fb25a6e5affS3VersionKey5B5295A8": Object {
+      "Description": "S3 key for asset version \\"c82ab631133fcbacba75e34003554476abe4d086d477fe4dc9c98fb25a6e5aff\\"",
+      "Type": "String",
+    },
+  },
+  "Resources": Object {
+    "Fn9270CBC0": Object {
+      "DependsOn": Array [
+        "FnServiceRoleB9001A96",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "ZipFile": "code",
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "FnServiceRoleB9001A96",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "FnServiceRoleB9001A96": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "LambdaConfig0334D595": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "Config": Object {
+          "Deep": Object {
+            "ObjectKey": "Hello world",
+          },
+          "My": "value",
+        },
+        "FunctionArn": Object {
+          "Fn::GetAtt": Array [
+            "Fn9270CBC0",
+            "Arn",
+          ],
+        },
+        "Nonce": "",
+        "ServiceToken": Object {
+          "Fn::GetAtt": Array [
+            "henristlambdaconfigproviderProviderframeworkonEventB2FC78D4",
+            "Arn",
+          ],
+        },
+      },
+      "Type": "AWS::CloudFormation::CustomResource",
+      "UpdateReplacePolicy": "Delete",
+    },
+    "henristlambdaconfigproviderProviderframeworkonEventB2FC78D4": Object {
+      "DependsOn": Array [
+        "henristlambdaconfigproviderProviderframeworkonEventServiceRoleDefaultPolicy3D96FE9E",
+        "henristlambdaconfigproviderProviderframeworkonEventServiceRole9AA104AD",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersc82ab631133fcbacba75e34003554476abe4d086d477fe4dc9c98fb25a6e5affS3Bucket9266BA0E",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersc82ab631133fcbacba75e34003554476abe4d086d477fe4dc9c98fb25a6e5affS3VersionKey5B5295A8",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersc82ab631133fcbacba75e34003554476abe4d086d477fe4dc9c98fb25a6e5affS3VersionKey5B5295A8",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Description": "AWS CDK resource provider framework - onEvent (Stack/henrist.lambda-config.provider/Provider)",
+        "Environment": Object {
+          "Variables": Object {
+            "USER_ON_EVENT_FUNCTION_ARN": Object {
+              "Fn::GetAtt": Array [
+                "henristlambdaconfigproviderUpdateCodeFnBF8DF66B",
+                "Arn",
+              ],
+            },
+          },
+        },
+        "Handler": "framework.onEvent",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "henristlambdaconfigproviderProviderframeworkonEventServiceRole9AA104AD",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs10.x",
+        "Timeout": 900,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "henristlambdaconfigproviderProviderframeworkonEventServiceRole9AA104AD": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "henristlambdaconfigproviderProviderframeworkonEventServiceRoleDefaultPolicy3D96FE9E": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "lambda:InvokeFunction",
+              "Effect": "Allow",
+              "Resource": Object {
+                "Fn::GetAtt": Array [
+                  "henristlambdaconfigproviderUpdateCodeFnBF8DF66B",
+                  "Arn",
+                ],
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "henristlambdaconfigproviderProviderframeworkonEventServiceRoleDefaultPolicy3D96FE9E",
+        "Roles": Array [
+          Object {
+            "Ref": "henristlambdaconfigproviderProviderframeworkonEventServiceRole9AA104AD",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+    "henristlambdaconfigproviderUpdateCodeFnBF8DF66B": Object {
+      "DependsOn": Array [
+        "henristlambdaconfigproviderUpdateCodeFnServiceRoleDefaultPolicyE51A664A",
+        "henristlambdaconfigproviderUpdateCodeFnServiceRole2FF24712",
+      ],
+      "Properties": Object {
+        "Code": Object {
+          "S3Bucket": Object {
+            "Ref": "AssetParametersa01cec960b58c5d4ab37f849b1af75bf2d04efe9541f332a4e67aefb46252909S3Bucket890F81D3",
+          },
+          "S3Key": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                Object {
+                  "Fn::Select": Array [
+                    0,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersa01cec960b58c5d4ab37f849b1af75bf2d04efe9541f332a4e67aefb46252909S3VersionKey268FBFBF",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                Object {
+                  "Fn::Select": Array [
+                    1,
+                    Object {
+                      "Fn::Split": Array [
+                        "||",
+                        Object {
+                          "Ref": "AssetParametersa01cec960b58c5d4ab37f849b1af75bf2d04efe9541f332a4e67aefb46252909S3VersionKey268FBFBF",
+                        },
+                      ],
+                    },
+                  ],
+                },
+              ],
+            ],
+          },
+        },
+        "Handler": "index.handler",
+        "Role": Object {
+          "Fn::GetAtt": Array [
+            "henristlambdaconfigproviderUpdateCodeFnServiceRole2FF24712",
+            "Arn",
+          ],
+        },
+        "Runtime": "nodejs12.x",
+        "Timeout": 10,
+      },
+      "Type": "AWS::Lambda::Function",
+    },
+    "henristlambdaconfigproviderUpdateCodeFnServiceRole2FF24712": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": "lambda.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "ManagedPolicyArns": Array [
+          Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "arn:",
+                Object {
+                  "Ref": "AWS::Partition",
+                },
+                ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
+              ],
+            ],
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "henristlambdaconfigproviderUpdateCodeFnServiceRoleDefaultPolicyE51A664A": Object {
+      "Properties": Object {
+        "PolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": Array [
+                "lambda:GetFunction",
+                "lambda:UpdateFunctionCode",
+              ],
+              "Effect": "Allow",
+              "Resource": "*",
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "PolicyName": "henristlambdaconfigproviderUpdateCodeFnServiceRoleDefaultPolicyE51A664A",
+        "Roles": Array [
+          Object {
+            "Ref": "henristlambdaconfigproviderUpdateCodeFnServiceRole2FF24712",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Policy",
+    },
+  },
+}
+`;
