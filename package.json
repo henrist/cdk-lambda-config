@@ -31,11 +31,11 @@
     "access": "public"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.51.0",
-    "@aws-cdk/aws-iam": "1.51.0",
-    "@aws-cdk/aws-lambda": "1.51.0",
-    "@aws-cdk/core": "1.51.0",
-    "@aws-cdk/custom-resources": "1.51.0",
+    "@aws-cdk/assert": "1.64.1",
+    "@aws-cdk/aws-iam": "1.64.1",
+    "@aws-cdk/aws-lambda": "1.64.1",
+    "@aws-cdk/core": "1.64.1",
+    "@aws-cdk/custom-resources": "1.64.1",
     "@commitlint/cli": "9.1.2",
     "@commitlint/config-conventional": "9.1.2",
     "@types/adm-zip": "0.4.33",
