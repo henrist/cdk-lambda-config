@@ -2,41 +2,14 @@
 
 exports[`LambdaConfig 1`] = `
 Object {
-  "Parameters": Object {
-    "AssetParameters1ed82f549c7384dfae04a04440b3d1bf30653fde425e280dbb3ea03dbb3c96fcArtifactHash0BEB5284": Object {
-      "Description": "Artifact hash for asset \\"1ed82f549c7384dfae04a04440b3d1bf30653fde425e280dbb3ea03dbb3c96fc\\"",
-      "Type": "String",
-    },
-    "AssetParameters1ed82f549c7384dfae04a04440b3d1bf30653fde425e280dbb3ea03dbb3c96fcS3Bucket52402240": Object {
-      "Description": "S3 bucket for asset \\"1ed82f549c7384dfae04a04440b3d1bf30653fde425e280dbb3ea03dbb3c96fc\\"",
-      "Type": "String",
-    },
-    "AssetParameters1ed82f549c7384dfae04a04440b3d1bf30653fde425e280dbb3ea03dbb3c96fcS3VersionKey772C133C": Object {
-      "Description": "S3 key for asset version \\"1ed82f549c7384dfae04a04440b3d1bf30653fde425e280dbb3ea03dbb3c96fc\\"",
-      "Type": "String",
-    },
-    "AssetParameters509d147e32879a7c55e8826cc0b60af8bf20d2cf1213314315aa089abfd34fc2ArtifactHash627539A6": Object {
-      "Description": "Artifact hash for asset \\"509d147e32879a7c55e8826cc0b60af8bf20d2cf1213314315aa089abfd34fc2\\"",
-      "Type": "String",
-    },
-    "AssetParameters509d147e32879a7c55e8826cc0b60af8bf20d2cf1213314315aa089abfd34fc2S3Bucket33108C73": Object {
-      "Description": "S3 bucket for asset \\"509d147e32879a7c55e8826cc0b60af8bf20d2cf1213314315aa089abfd34fc2\\"",
-      "Type": "String",
-    },
-    "AssetParameters509d147e32879a7c55e8826cc0b60af8bf20d2cf1213314315aa089abfd34fc2S3VersionKey3CD95BA8": Object {
-      "Description": "S3 key for asset version \\"509d147e32879a7c55e8826cc0b60af8bf20d2cf1213314315aa089abfd34fc2\\"",
-      "Type": "String",
-    },
-  },
+  "Parameters": Any<Object>,
   "Resources": Object {
     "Fn9270CBC0": Object {
       "DependsOn": Array [
         "FnServiceRoleB9001A96",
       ],
       "Properties": Object {
-        "Code": Object {
-          "ZipFile": "code",
-        },
+        "Code": Any<Object>,
         "Handler": "index.handler",
         "Role": Object {
           "Fn::GetAtt": Array [
@@ -111,44 +84,7 @@ Object {
         "henristlambdaconfigproviderProviderframeworkonEventServiceRole9AA104AD",
       ],
       "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
-            "Ref": "AssetParameters1ed82f549c7384dfae04a04440b3d1bf30653fde425e280dbb3ea03dbb3c96fcS3Bucket52402240",
-          },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters1ed82f549c7384dfae04a04440b3d1bf30653fde425e280dbb3ea03dbb3c96fcS3VersionKey772C133C",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters1ed82f549c7384dfae04a04440b3d1bf30653fde425e280dbb3ea03dbb3c96fcS3VersionKey772C133C",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
-        },
+        "Code": Any<Object>,
         "Description": "AWS CDK resource provider framework - onEvent (Stack/henrist.lambda-config.provider/Provider)",
         "Environment": Object {
           "Variables": Object {
@@ -235,44 +171,7 @@ Object {
         "henristlambdaconfigproviderUpdateCodeFnServiceRole2FF24712",
       ],
       "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
-            "Ref": "AssetParameters509d147e32879a7c55e8826cc0b60af8bf20d2cf1213314315aa089abfd34fc2S3Bucket33108C73",
-          },
-          "S3Key": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                Object {
-                  "Fn::Select": Array [
-                    0,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters509d147e32879a7c55e8826cc0b60af8bf20d2cf1213314315aa089abfd34fc2S3VersionKey3CD95BA8",
-                        },
-                      ],
-                    },
-                  ],
-                },
-                Object {
-                  "Fn::Select": Array [
-                    1,
-                    Object {
-                      "Fn::Split": Array [
-                        "||",
-                        Object {
-                          "Ref": "AssetParameters509d147e32879a7c55e8826cc0b60af8bf20d2cf1213314315aa089abfd34fc2S3VersionKey3CD95BA8",
-                        },
-                      ],
-                    },
-                  ],
-                },
-              ],
-            ],
-          },
-        },
+        "Code": Any<Object>,
         "Handler": "index.handler",
         "Role": Object {
           "Fn::GetAtt": Array [
