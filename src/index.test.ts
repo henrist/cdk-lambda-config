@@ -28,7 +28,7 @@ test("LambdaConfig", () => {
     },
   })
 
-  expect(fnWithConfig.version.functionArn).toMatch("${Token[TOKEN.135]}")
+  expect(fnWithConfig.version.functionArn).toMatch("${Token[TOKEN.141]}")
   expect(stack).toMatchCdkSnapshot({
     ignoreAssets: true,
   })
