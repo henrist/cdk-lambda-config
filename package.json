@@ -47,7 +47,7 @@
     "adm-zip": "0.5.5",
     "aws-sdk": "2.761.0",
     "axios": "0.21.1",
-    "eslint": "7.24.0",
+    "eslint": "7.25.0",
     "eslint-config-prettier": "8.2.0",
     "eslint-plugin-deprecation": "1.2.0",
     "eslint-plugin-prettier": "3.4.0",
