@@ -46,7 +46,7 @@
     "@typescript-eslint/parser": "4.33.0",
     "adm-zip": "0.5.9",
     "aws-sdk": "2.918.0",
-    "axios": "0.22.0",
+    "axios": "0.24.0",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-deprecation": "1.2.1",
