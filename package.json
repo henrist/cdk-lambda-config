@@ -31,29 +31,27 @@
     "access": "public"
   },
   "devDependencies": {
-    "@aws-cdk/assert": "1.125.0",
-    "@aws-cdk/aws-iam": "1.125.0",
-    "@aws-cdk/aws-lambda": "1.125.0",
-    "@aws-cdk/core": "1.125.0",
-    "@aws-cdk/custom-resources": "1.125.0",
+    "@aws-cdk/assert": "2.0.0",
     "@commitlint/cli": "15.0.0",
     "@commitlint/config-conventional": "15.0.0",
     "@types/adm-zip": "0.4.34",
     "@types/aws-lambda": "8.10.85",
-    "@types/jest": "26.0.24",
+    "@types/jest": "27.0.3",
     "@types/node": "16.11.11",
     "@typescript-eslint/eslint-plugin": "4.33.0",
     "@typescript-eslint/parser": "4.33.0",
     "adm-zip": "0.5.9",
+    "aws-cdk-lib": "2.0.0",
     "aws-sdk": "2.918.0",
     "axios": "0.24.0",
+    "constructs": "10.0.9",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-deprecation": "1.2.1",
     "eslint-plugin-prettier": "3.4.1",
     "husky": "7.0.4",
     "jest": "27.3.1",
-    "jest-cdk-snapshot": "1.4.2",
+    "jest-cdk-snapshot": "2.0.1",
     "prettier": "2.5.0",
     "rimraf": "3.0.2",
     "semantic-release": "18.0.1",
@@ -65,9 +63,7 @@
     "webpack-cli": "4.9.1"
   },
   "peerDependencies": {
-    "@aws-cdk/aws-iam": "^1.50.1",
-    "@aws-cdk/aws-lambda": "^1.50.1",
-    "@aws-cdk/core": "^1.50.1",
-    "@aws-cdk/custom-resources": "^1.50.1"
+    "aws-cdk-lib": "^2.0.0",
+    "constructs": "^10.0.0"
   }
 }

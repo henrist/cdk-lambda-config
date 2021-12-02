@@ -1,11 +1,10 @@
-import * as lambda from "@aws-cdk/aws-lambda"
-import * as cdk from "@aws-cdk/core"
+import { App, aws_lambda as lambda, Stack } from "aws-cdk-lib"
 import "jest-cdk-snapshot"
 import { LambdaConfig } from "."
 
 test("LambdaConfig", () => {
-  const app = new cdk.App()
-  const stack = new cdk.Stack(app, "Stack", {
+  const app = new App()
+  const stack = new Stack(app, "Stack", {
     env: {
       account: "112233445566",
       region: "eu-west-1",

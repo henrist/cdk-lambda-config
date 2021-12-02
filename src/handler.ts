@@ -1,7 +1,7 @@
 // Cheating a bit as it seems the type is not available in the export.
 // TODO: Duplicate the relevant type parts?
-import type { OnEventHandler } from "@aws-cdk/custom-resources/lib/provider-framework/types"
 import Zip from "adm-zip"
+import type { OnEventHandler } from "aws-cdk-lib/custom-resources/lib/provider-framework/types"
 import Lambda from "aws-sdk/clients/lambda"
 import axios from "axios"
 import { mkdtempSync, writeFileSync } from "fs"

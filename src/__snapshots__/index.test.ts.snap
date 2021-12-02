@@ -2,7 +2,6 @@
 
 exports[`LambdaConfig 1`] = `
 Object {
-  "Parameters": Any<Object>,
   "Resources": Object {
     "Fn9270CBC0": Object {
       "DependsOn": Array [
@@ -103,7 +102,7 @@ Object {
             "Arn",
           ],
         },
-        "Runtime": "nodejs14.x",
+        "Runtime": "nodejs12.x",
         "Timeout": 900,
       },
       "Type": "AWS::Lambda::Function",

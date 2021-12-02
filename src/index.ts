@@ -1,7 +1,12 @@
-import * as iam from "@aws-cdk/aws-iam"
-import * as lambda from "@aws-cdk/aws-lambda"
-import * as cdk from "@aws-cdk/core"
-import * as cr from "@aws-cdk/custom-resources"
+import {
+  aws_iam as iam,
+  aws_lambda as lambda,
+  CustomResource,
+  custom_resources as cr,
+  Duration,
+  Stack,
+} from "aws-cdk-lib"
+import { Construct } from "constructs"
 import * as path from "path"
 
 export interface LambdaConfigProps {
@@ -38,13 +43,13 @@ export interface LambdaConfigProps {
  * the provided object, and provide a new version for the
  * Lambda Function.
  */
-export class LambdaConfig extends cdk.Construct {
+export class LambdaConfig extends Construct {
   public readonly version: lambda.IVersion
 
-  constructor(scope: cdk.Construct, id: string, props: LambdaConfigProps) {
+  constructor(scope: Construct, id: string, props: LambdaConfigProps) {
     super(scope, id)
 
-    const updateCodeResource = new cdk.CustomResource(this, "Resource", {
+    const updateCodeResource = new CustomResource(this, "Resource", {
       serviceToken: LambdaConfigProvider.getOrCreate(this).serviceToken,
       properties: {
         FunctionArn: props.function.functionArn,
@@ -61,12 +66,12 @@ export class LambdaConfig extends cdk.Construct {
   }
 }
 
-class LambdaConfigProvider extends cdk.Construct {
+class LambdaConfigProvider extends Construct {
   /**
    * Returns the singleton provider.
    */
-  public static getOrCreate(scope: cdk.Construct) {
-    const stack = cdk.Stack.of(scope)
+  public static getOrCreate(scope: Construct) {
+    const stack = Stack.of(scope)
     const id = "henrist.lambda-config.provider"
     return (
       (stack.node.tryFindChild(id) as LambdaConfigProvider) ||
@@ -77,7 +82,7 @@ class LambdaConfigProvider extends cdk.Construct {
   private readonly provider: cr.Provider
   public readonly serviceToken: string
 
-  constructor(scope: cdk.Construct, id: string) {
+  constructor(scope: Construct, id: string) {
     super(scope, id)
 
     this.provider = new cr.Provider(this, "Provider", {
@@ -85,7 +90,7 @@ class LambdaConfigProvider extends cdk.Construct {
         code: lambda.Code.fromAsset(path.join(__dirname, "../dist/handler")),
         handler: "index.handler",
         runtime: lambda.Runtime.NODEJS_12_X,
-        timeout: cdk.Duration.seconds(10),
+        timeout: Duration.seconds(10),
         initialPolicy: [
           new iam.PolicyStatement({
             actions: ["lambda:GetFunction", "lambda:UpdateFunctionCode"],
