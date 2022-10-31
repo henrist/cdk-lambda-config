@@ -14,7 +14,7 @@ test("LambdaConfig", () => {
   const fn = new lambda.Function(stack, "Fn", {
     code: lambda.Code.fromInline("code"),
     handler: "index.handler",
-    runtime: lambda.Runtime.NODEJS_12_X,
+    runtime: lambda.Runtime.NODEJS_16_X,
   })
 
   const fnWithConfig = new LambdaConfig(stack, "LambdaConfig", {
