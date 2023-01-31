@@ -43,7 +43,7 @@
     "adm-zip": "0.5.10",
     "aws-cdk-lib": "2.62.2",
     "aws-sdk": "2.1243.0",
-    "axios": "1.2.5",
+    "axios": "1.2.6",
     "constructs": "10.1.233",
     "eslint": "8.32.0",
     "eslint-config-prettier": "8.6.0",
