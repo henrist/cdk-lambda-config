@@ -44,7 +44,7 @@
     "aws-cdk-lib": "2.79.1",
     "aws-sdk": "2.1243.0",
     "axios": "1.4.0",
-    "constructs": "10.2.19",
+    "constructs": "10.2.20",
     "eslint": "8.40.0",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-prettier": "4.2.1",
