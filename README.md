@@ -11,7 +11,7 @@ Inspired by similar mechanism in https://github.com/aws-samples/cloudfront-autho
 ## Usage
 
 ```bash
-npm install @henrist/cdk-lambda-config
+npm install @studyportals/cdk-lambda-config
 ```
 
 Using the construct:
@@ -41,3 +41,8 @@ const config = JSON.parse(
   fs.readFileSync(path.join(__dirname, "config.json"), "utf-8"),
 )
 ```
+
+If function update is meant to run concurrently targeting the same function, you can pass 
+`locksTable` property in the `config` object, pointing to a table that's been created 
+using `LockableTable.create(this,"UpdateCodeLocks")` in the project that uses `@studyportals/cdk-lambda-config`
+This will ensure that multiple stacks won't get stuck while trying to update the same function

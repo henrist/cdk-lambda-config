@@ -1,6 +1,6 @@
 import { App, aws_lambda as lambda, Stack } from "aws-cdk-lib"
 import "jest-cdk-snapshot"
-import { LambdaConfig } from "."
+import { LambdaConfig } from "./lambda-config"
 
 test("LambdaConfig", () => {
   const app = new App()
