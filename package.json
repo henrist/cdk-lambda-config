@@ -42,7 +42,7 @@
     "@typescript-eslint/parser": "5.62.0",
     "adm-zip": "0.5.10",
     "aws-cdk-lib": "2.84.0",
-    "aws-sdk": "2.1386.0",
+    "aws-sdk": "2.1430.0",
     "axios": "1.4.0",
     "constructs": "10.2.69",
     "eslint": "8.46.0",
