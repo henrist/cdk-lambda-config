@@ -35,7 +35,7 @@
     "@commitlint/cli": "17.7.1",
     "@commitlint/config-conventional": "17.7.0",
     "@types/adm-zip": "0.5.2",
-    "@types/aws-lambda": "8.10.119",
+    "@types/aws-lambda": "8.10.124",
     "@types/jest": "29.5.4",
     "@types/node": "18.17.14",
     "@typescript-eslint/eslint-plugin": "5.62.0",
