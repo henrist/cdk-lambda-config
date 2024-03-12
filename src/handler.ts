@@ -93,7 +93,9 @@ const createOrUpdateFunction = async (
         Publish: true,
       })
       .promise()
-
+    if (FunctionArn) {
+      await waitAndGetFunction(FunctionArn) // Wait for the new function version to be ready
+    }
     console.log(`Updated function '${functionSimpleArn}'`, {
       CodeSha256,
       Version,

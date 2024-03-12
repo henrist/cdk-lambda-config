@@ -1,6 +1,6 @@
 {
   "name": "@studyportals/cdk-lambda-config",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CDK Construct for adding config.json file to a Lambda Function",
   "repository": {
     "type": "git",
