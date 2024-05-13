@@ -1,5 +1,7 @@
-import { DocumentClient } from "aws-sdk/clients/dynamodb"
-const dynamoDBClient: DocumentClient = new DocumentClient({
+import { DynamoDBClient } from "@aws-sdk/client-dynamodb"
+import { PutCommand, DeleteCommand } from "@aws-sdk/lib-dynamodb"
+
+const dynamoDBClient = new DynamoDBClient({
   region: "us-east-1",
 })
 
@@ -16,10 +18,13 @@ export const acquireLock = async (
   }
 
   try {
-    await dynamoDBClient.put(params).promise()
+    await dynamoDBClient.send(new PutCommand(params))
     return true
   } catch (err) {
-    if ((err as AWSError).code === "ConditionalCheckFailedException") {
+    if (
+      err instanceof Error &&
+      err.name === "ConditionalCheckFailedException"
+    ) {
       return false
     }
     throw err
@@ -39,10 +44,13 @@ export const releaseLock = async (
   }
 
   try {
-    await dynamoDBClient.delete(params).promise()
+    await dynamoDBClient.send(new DeleteCommand(params))
     return true
-  } catch (err: unknown) {
-    if ((err as AWSError).code === "ConditionalCheckFailedException") {
+  } catch (err) {
+    if (
+      err instanceof Error &&
+      err.name === "ConditionalCheckFailedException"
+    ) {
       return false
     }
     throw err

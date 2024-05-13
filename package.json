@@ -1,6 +1,6 @@
 {
   "name": "@studyportals/cdk-lambda-config",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "CDK Construct for adding config.json file to a Lambda Function",
   "repository": {
     "type": "git",
@@ -41,8 +41,7 @@
     "@typescript-eslint/eslint-plugin": "5.62.0",
     "@typescript-eslint/parser": "5.62.0",
     "adm-zip": "0.5.10",
-    "aws-cdk-lib": "2.84.0",
-    "aws-sdk": "2.1446.0",
+    "aws-cdk-lib": "2.141.0",
     "axios": "1.6.0",
     "constructs": "10.3.0",
     "eslint": "8.51.0",
@@ -64,5 +63,10 @@
   "peerDependencies": {
     "aws-cdk-lib": "^2.0.0",
     "constructs": "^10.0.0"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.574.0",
+    "@aws-sdk/client-lambda": "^3.574.0",
+    "@aws-sdk/lib-dynamodb": "^3.574.0"
   }
 }

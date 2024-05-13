@@ -1,17 +1,14 @@
-// Cheating a bit as it seems the type is not available in the export.
-// TODO: Duplicate the relevant type parts?
-import Zip from "adm-zip"
-import type { OnEventHandler } from "aws-cdk-lib/custom-resources/lib/provider-framework/types"
-import Lambda, { GetFunctionResponse } from "aws-sdk/clients/lambda"
+import {
+  LambdaClient,
+  GetFunctionCommand,
+  UpdateFunctionCodeCommand,
+} from "@aws-sdk/client-lambda"
 import axios from "axios"
 import { mkdtempSync, writeFileSync } from "fs"
 import { resolve } from "path"
 import { acquireLock, releaseLock } from "./locks"
-import { AWSError } from "aws-sdk/lib/error"
-import { PromiseResult } from "aws-sdk/lib/request"
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type Config = Record<string, any>
+import Zip from "adm-zip"
+import type { OnEventHandler } from "aws-cdk-lib/custom-resources/lib/provider-framework/types"
 
 const RETRY_INTERVAL_MS = 15000
 const RETRY_ATTEMPTS = 6
@@ -19,21 +16,16 @@ const RETRY_ATTEMPTS = 6
 export const handler: OnEventHandler = async (event) => {
   switch (event.RequestType) {
     case "Delete":
-      // Nothing to do on delete.
-      return {
-        PhysicalResourceId: event.PhysicalResourceId,
-      }
-
+      return { PhysicalResourceId: event.PhysicalResourceId }
     case "Create":
     case "Update":
       console.log(JSON.stringify(event))
 
       const functionArnFull = event.ResourceProperties.FunctionArn as string
-      const config = event.ResourceProperties.Config as Config
+      const config = event.ResourceProperties.Config as Record<string, any>
       const lockTableName = getTableNameFromArn(config["locksTable"] as string)
       const functionArn = withoutVersion(functionArnFull)
-
-      const lambda = new Lambda({
+      const lambda = new LambdaClient({
         region: getFunctionRegion(functionArn),
       })
 
@@ -41,17 +33,17 @@ export const handler: OnEventHandler = async (event) => {
   }
 }
 
-const getTableNameFromArn = (arn: string): string | undefined => {
+function getTableNameFromArn(arn: string): string | undefined {
   const match = arn.match(/table\/([^/]+)/)
   return match ? match[1] : undefined
 }
 
-const createOrUpdateFunction = async (
-  lambda: Lambda,
+async function createOrUpdateFunction(
+  lambda: LambdaClient,
   functionSimpleArn: string,
-  config: Config,
+  config: Record<string, any>,
   lockTableName?: string,
-) => {
+) {
   const lockName = `${functionSimpleArn}-update-lock`
   if (lockTableName) {
     let acquireLockResult: boolean | null = null
@@ -61,7 +53,7 @@ const createOrUpdateFunction = async (
       if (!acquireLockResult) {
         retryCount++
         if (retryCount === RETRY_ATTEMPTS) {
-          console.log(
+          console.error(
             `Could not acquire lock to update function '${functionSimpleArn}' after ${retryCount} retries. Preparing to exit.`,
           )
           throw new Error(
@@ -80,29 +72,29 @@ const createOrUpdateFunction = async (
   }
 
   try {
-    const { Code } = await waitAndGetFunction(functionSimpleArn)
-
-    const { data } = await axios.get<Buffer>(Code!.Location!, {
+    const getCodeResponse = await lambda.send(
+      new GetFunctionCommand({ FunctionName: functionSimpleArn }),
+    )
+    const { data } = await axios.get<Buffer>(getCodeResponse.Code!.Location!, {
       responseType: "arraybuffer",
     })
 
-    const { CodeSha256, Version, FunctionArn } = await lambda
-      .updateFunctionCode({
+    const updateCodeResponse = await lambda.send(
+      new UpdateFunctionCodeCommand({
         FunctionName: functionSimpleArn,
         ZipFile: addConfigToZip(data, config),
         Publish: true,
-      })
-      .promise()
-    if (FunctionArn) {
-      await waitAndGetFunction(FunctionArn) // Wait for the new function version to be ready
-    }
-    console.log(`Updated function '${functionSimpleArn}'`, {
-      CodeSha256,
-      Version,
-    })
+      }),
+    )
+
+    console.log(`Updated function '${functionSimpleArn}'`, updateCodeResponse)
     return {
       PhysicalResourceId: functionSimpleArn,
-      Data: { CodeSha256, Version, FunctionArn },
+      Data: {
+        CodeSha256: updateCodeResponse.CodeSha256,
+        Version: updateCodeResponse.Version,
+        FunctionArn: updateCodeResponse.FunctionArn,
+      },
     }
   } catch (err) {
     console.error(`Error updating function '${functionSimpleArn}':`, err)
@@ -123,8 +115,6 @@ function getFunctionRegion(arn: string): string {
 }
 
 function withoutVersion(arn: string): string {
-  // Example value: arn:aws:lambda:eu-west-1:112233445566:function:my-function:1
-  // Result: arn:aws:lambda:eu-west-1:112233445566:function:my-function
   const match = /^(arn:aws:lambda:[^:]+:[^:]+:function:[^:]+):[^:]+$/.exec(arn)
   if (!match) {
     return arn
@@ -132,47 +122,13 @@ function withoutVersion(arn: string): string {
   return match[1]
 }
 
-async function waitAndGetFunction(
-  functionArn: string,
-  timeoutMs = 30000,
-): Promise<PromiseResult<GetFunctionResponse, AWSError>> {
-  const lambda = new Lambda({ region: getFunctionRegion(functionArn) })
-
-  const startTime = Date.now()
-  let timeout = false
-
-  while (!timeout) {
-    const response = await lambda
-      .getFunction({ FunctionName: functionArn })
-      .promise()
-    console.log(JSON.stringify(response, null, 2))
-
-    if (
-      response.Configuration?.State === "Active" &&
-      response.Configuration?.LastUpdateStatus === "Successful"
-    ) {
-      console.log(`Function update ready: ${functionArn}`)
-      return response
-    }
-
-    if (Date.now() - startTime >= timeoutMs) {
-      timeout = true
-      break
-    }
-    console.log(`Waiting for function update ready: ${functionArn}`)
-    await new Promise((resolve) => setTimeout(resolve, 1000)) // Wait 1 second before trying again
-  }
-
-  throw new Error(`Timeout waiting for function update ready: ${functionArn}`)
-}
-
-function addConfigToZip(data: Buffer, config: Config): Buffer {
+function addConfigToZip(data: Buffer, config: Record<string, any>): Buffer {
   const lambdaZip = new Zip(data)
   const tempDir = mkdtempSync("/tmp/lambda-package")
   lambdaZip.extractAllTo(tempDir, true)
   writeFileSync(
     resolve(tempDir, "config.json"),
-    Buffer.from(JSON.stringify(config, null, 2)),
+    JSON.stringify(config, null, 2),
   )
 
   const newLambdaZip = new Zip()
