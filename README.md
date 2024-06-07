@@ -11,7 +11,7 @@ Inspired by similar mechanism in https://github.com/aws-samples/cloudfront-autho
 ## Usage
 
 ```bash
-npm install @henrist/cdk-lambda-config
+npm install @liflig/cdk-lambda-config
 ```
 
 Using the construct:
@@ -27,7 +27,7 @@ const updatedFunction = new LambdaConfig(this, "UpdatedFunction", {
     },
   },
   nonce: "1", // See TSDoc.
-}
+})
 // Can now retrieve the new version:
 updatedFunction.version
 ```
