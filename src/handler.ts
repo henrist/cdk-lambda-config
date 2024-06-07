@@ -2,7 +2,11 @@
 // TODO: Duplicate the relevant type parts?
 import Zip from "adm-zip"
 import type { OnEventHandler } from "aws-cdk-lib/custom-resources/lib/provider-framework/types"
-import Lambda from "aws-sdk/clients/lambda"
+import {
+  LambdaClient,
+  GetFunctionCommand,
+  UpdateFunctionCodeCommand,
+} from "@aws-sdk/client-lambda"
 import axios from "axios"
 import { mkdtempSync, writeFileSync } from "fs"
 import { resolve } from "path"
@@ -28,28 +32,28 @@ export const handler: OnEventHandler = async (event) => {
       const functionArn = withoutVersion(functionArnFull)
       console.log(`Modifying function '${functionArnFull}'`)
 
-      const lambda = new Lambda({
+      const lambdaClient = new LambdaClient({
         region: getFunctionRegion(functionArn),
       })
 
-      const { Code } = await lambda
-        .getFunction({
+      const { Code } = await lambdaClient.send(
+        new GetFunctionCommand({
           FunctionName: functionArn,
-        })
-        .promise()
+        }),
+      )
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const { data } = await axios.get<Buffer>(Code!.Location!, {
         responseType: "arraybuffer",
       })
 
-      const { CodeSha256, Version, FunctionArn } = await lambda
-        .updateFunctionCode({
+      const { CodeSha256, Version, FunctionArn } = await lambdaClient.send(
+        new UpdateFunctionCodeCommand({
           FunctionName: functionArn,
           ZipFile: addConfigToZip(data, config),
           Publish: true,
-        })
-        .promise()
+        }),
+      )
 
       console.log("Updated function", { CodeSha256, Version, FunctionArn })
 

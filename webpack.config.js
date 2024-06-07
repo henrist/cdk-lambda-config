@@ -22,7 +22,7 @@ module.exports = {
       },
     ],
   },
-  externals: [/^aws-sdk/, "original-fs"],
+  externals: [/^@aws-sdk/, "original-fs"],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
