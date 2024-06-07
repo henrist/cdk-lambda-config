@@ -72,7 +72,7 @@ class LambdaConfigProvider extends Construct {
    */
   public static getOrCreate(scope: Construct) {
     const stack = Stack.of(scope)
-    const id = "henrist.lambda-config.provider"
+    const id = "liflig-infra.lambda-config.provider"
     return (
       (stack.node.tryFindChild(id) as LambdaConfigProvider) ||
       new LambdaConfigProvider(stack, id)

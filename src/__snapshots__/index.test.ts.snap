@@ -69,7 +69,7 @@ exports[`LambdaConfig 1`] = `
         "Nonce": "",
         "ServiceToken": {
           "Fn::GetAtt": [
-            "henristlambdaconfigproviderProviderframeworkonEventB2FC78D4",
+            "lifliginfralambdaconfigproviderProviderframeworkonEvent1D60D68A",
             "Arn",
           ],
         },
@@ -77,19 +77,19 @@ exports[`LambdaConfig 1`] = `
       "Type": "AWS::CloudFormation::CustomResource",
       "UpdateReplacePolicy": "Delete",
     },
-    "henristlambdaconfigproviderProviderframeworkonEventB2FC78D4": {
+    "lifliginfralambdaconfigproviderProviderframeworkonEvent1D60D68A": {
       "DependsOn": [
-        "henristlambdaconfigproviderProviderframeworkonEventServiceRoleDefaultPolicy3D96FE9E",
-        "henristlambdaconfigproviderProviderframeworkonEventServiceRole9AA104AD",
+        "lifliginfralambdaconfigproviderProviderframeworkonEventServiceRoleDefaultPolicy554FD5A5",
+        "lifliginfralambdaconfigproviderProviderframeworkonEventServiceRoleD0656D3D",
       ],
       "Properties": {
         "Code": Any<Object>,
-        "Description": "AWS CDK resource provider framework - onEvent (Stack/henrist.lambda-config.provider/Provider)",
+        "Description": "AWS CDK resource provider framework - onEvent (Stack/liflig-infra.lambda-config.provider/Provider)",
         "Environment": {
           "Variables": {
             "USER_ON_EVENT_FUNCTION_ARN": {
               "Fn::GetAtt": [
-                "henristlambdaconfigproviderUpdateCodeFnBF8DF66B",
+                "lifliginfralambdaconfigproviderUpdateCodeFnB8571480",
                 "Arn",
               ],
             },
@@ -98,7 +98,7 @@ exports[`LambdaConfig 1`] = `
         "Handler": "framework.onEvent",
         "Role": {
           "Fn::GetAtt": [
-            "henristlambdaconfigproviderProviderframeworkonEventServiceRole9AA104AD",
+            "lifliginfralambdaconfigproviderProviderframeworkonEventServiceRoleD0656D3D",
             "Arn",
           ],
         },
@@ -107,7 +107,7 @@ exports[`LambdaConfig 1`] = `
       },
       "Type": "AWS::Lambda::Function",
     },
-    "henristlambdaconfigproviderProviderframeworkonEventServiceRole9AA104AD": {
+    "lifliginfralambdaconfigproviderProviderframeworkonEventServiceRoleD0656D3D": {
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -138,7 +138,7 @@ exports[`LambdaConfig 1`] = `
       },
       "Type": "AWS::IAM::Role",
     },
-    "henristlambdaconfigproviderProviderframeworkonEventServiceRoleDefaultPolicy3D96FE9E": {
+    "lifliginfralambdaconfigproviderProviderframeworkonEventServiceRoleDefaultPolicy554FD5A5": {
       "Properties": {
         "PolicyDocument": {
           "Statement": [
@@ -148,7 +148,7 @@ exports[`LambdaConfig 1`] = `
               "Resource": [
                 {
                   "Fn::GetAtt": [
-                    "henristlambdaconfigproviderUpdateCodeFnBF8DF66B",
+                    "lifliginfralambdaconfigproviderUpdateCodeFnB8571480",
                     "Arn",
                   ],
                 },
@@ -158,7 +158,7 @@ exports[`LambdaConfig 1`] = `
                     [
                       {
                         "Fn::GetAtt": [
-                          "henristlambdaconfigproviderUpdateCodeFnBF8DF66B",
+                          "lifliginfralambdaconfigproviderUpdateCodeFnB8571480",
                           "Arn",
                         ],
                       },
@@ -171,26 +171,26 @@ exports[`LambdaConfig 1`] = `
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "henristlambdaconfigproviderProviderframeworkonEventServiceRoleDefaultPolicy3D96FE9E",
+        "PolicyName": "lifliginfralambdaconfigproviderProviderframeworkonEventServiceRoleDefaultPolicy554FD5A5",
         "Roles": [
           {
-            "Ref": "henristlambdaconfigproviderProviderframeworkonEventServiceRole9AA104AD",
+            "Ref": "lifliginfralambdaconfigproviderProviderframeworkonEventServiceRoleD0656D3D",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
     },
-    "henristlambdaconfigproviderUpdateCodeFnBF8DF66B": {
+    "lifliginfralambdaconfigproviderUpdateCodeFnB8571480": {
       "DependsOn": [
-        "henristlambdaconfigproviderUpdateCodeFnServiceRoleDefaultPolicyE51A664A",
-        "henristlambdaconfigproviderUpdateCodeFnServiceRole2FF24712",
+        "lifliginfralambdaconfigproviderUpdateCodeFnServiceRoleDefaultPolicy02148DBC",
+        "lifliginfralambdaconfigproviderUpdateCodeFnServiceRole1C9B6DC9",
       ],
       "Properties": {
         "Code": Any<Object>,
         "Handler": "index.handler",
         "Role": {
           "Fn::GetAtt": [
-            "henristlambdaconfigproviderUpdateCodeFnServiceRole2FF24712",
+            "lifliginfralambdaconfigproviderUpdateCodeFnServiceRole1C9B6DC9",
             "Arn",
           ],
         },
@@ -199,7 +199,7 @@ exports[`LambdaConfig 1`] = `
       },
       "Type": "AWS::Lambda::Function",
     },
-    "henristlambdaconfigproviderUpdateCodeFnServiceRole2FF24712": {
+    "lifliginfralambdaconfigproviderUpdateCodeFnServiceRole1C9B6DC9": {
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -230,7 +230,7 @@ exports[`LambdaConfig 1`] = `
       },
       "Type": "AWS::IAM::Role",
     },
-    "henristlambdaconfigproviderUpdateCodeFnServiceRoleDefaultPolicyE51A664A": {
+    "lifliginfralambdaconfigproviderUpdateCodeFnServiceRoleDefaultPolicy02148DBC": {
       "Properties": {
         "PolicyDocument": {
           "Statement": [
@@ -245,10 +245,10 @@ exports[`LambdaConfig 1`] = `
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "henristlambdaconfigproviderUpdateCodeFnServiceRoleDefaultPolicyE51A664A",
+        "PolicyName": "lifliginfralambdaconfigproviderUpdateCodeFnServiceRoleDefaultPolicy02148DBC",
         "Roles": [
           {
-            "Ref": "henristlambdaconfigproviderUpdateCodeFnServiceRole2FF24712",
+            "Ref": "lifliginfralambdaconfigproviderUpdateCodeFnServiceRole1C9B6DC9",
           },
         ],
       },

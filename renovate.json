@@ -1,6 +1,6 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>henrist/renovate-config:library"],
+  "extends": ["github>capralifecycle/renovate-config:library"],
   "automerge": true,
   "automergeType": "branch",
   "packageRules": [
