@@ -1,10 +1,10 @@
 {
-  "name": "@henrist/cdk-lambda-config",
+  "name": "@liflig/cdk-lambda-config",
   "version": "0.0.0-development",
   "description": "CDK Construct for adding config.json file to a Lambda Function",
   "repository": {
     "type": "git",
-    "url": "https://github.com/henrist/cdk-lambda-config"
+    "url": "https://github.com/capralifecycle/cdk-lambda-config"
   },
   "scripts": {
     "build": "rimraf dist && webpack && tsc",
