@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "@aws-cdk/assert": "2.68.0",
+    "@aws-sdk/client-lambda": "3.592.0",
     "@commitlint/cli": "17.8.0",
     "@commitlint/config-conventional": "17.8.0",
     "@types/adm-zip": "0.5.2",
@@ -42,7 +43,6 @@
     "@typescript-eslint/parser": "5.62.0",
     "adm-zip": "0.5.10",
     "aws-cdk-lib": "2.84.0",
-    "aws-sdk": "2.1446.0",
     "axios": "1.6.0",
     "constructs": "10.3.0",
     "eslint": "8.51.0",
