@@ -9,5 +9,6 @@
       "packageNames": ["adm-zip", "@aws-sdk", "axios", "typescript", "webpack"],
       "semanticCommitType": "fix"
     }
-  ]
+  ],
+  "forkProcessing": "enabled"
 }
