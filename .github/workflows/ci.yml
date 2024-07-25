@@ -25,13 +25,13 @@ jobs:
     steps:
       - uses: actions/checkout@a5ac7e51b41094c92402da3b24376905380afc29 # v4.1.6
 
-      - uses: capralifecycle/actions-lib/check-runtime-dependencies@93a3def017e46bbf9fd49179f4ce752283157c85 # v1.3.2
+      - uses: capralifecycle/actions-lib/check-runtime-dependencies@e3bb96046b8b72962d3f08971adde45017d09346 # v1.5.1
 
       - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4.0.2
         with:
           node-version: 20
 
-      - uses: capralifecycle/actions-lib/configure-npm@93a3def017e46bbf9fd49179f4ce752283157c85 # v1.3.2
+      - uses: capralifecycle/actions-lib/configure-npm@e3bb96046b8b72962d3f08971adde45017d09346 # v1.5.1
 
       - name: install dependencies
         run: npm ci
