@@ -12,7 +12,7 @@
     "test": "jest",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "prepare": "npm run build && husky install",
+    "prepare": "npm run build && husky",
     "semantic-release": "semantic-release"
   },
   "keywords": [
