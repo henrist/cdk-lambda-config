@@ -1,7 +1,7 @@
 // Cheating a bit as it seems the type is not available in the export.
-// TODO: Duplicate the relevant type parts?
+// Define the OnEventHandler type since we can't import it
 import Zip from "adm-zip"
-import type { OnEventHandler } from "aws-cdk-lib/custom-resources/lib/provider-framework/types"
+
 import {
   LambdaClient,
   GetFunctionCommand,
@@ -11,9 +11,17 @@ import axios from "axios"
 import { mkdtempSync, writeFileSync } from "fs"
 import { resolve } from "path"
 
+type OnEventHandler = (event: {
+  RequestType: "Create" | "Update" | "Delete"
+  PhysicalResourceId?: string
+  ResourceProperties: Record<string, unknown>
+}) => Promise<{
+  PhysicalResourceId?: string
+  Data?: Record<string, unknown>
+}>
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Config = Record<string, any>
-
 export const handler: OnEventHandler = async (event) => {
   switch (event.RequestType) {
     case "Delete":
@@ -41,9 +49,8 @@ export const handler: OnEventHandler = async (event) => {
           FunctionName: functionArn,
         }),
       )
-
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      const { data } = await axios.get<Buffer>(Code!.Location!, {
+      const { data } = await axios.get<Buffer>(Code?.Location ?? "", {
         responseType: "arraybuffer",
       })
 
