@@ -1,14 +1,24 @@
 {
   "compilerOptions": {
-    "declaration": true,
     "esModuleInterop": true,
+    "skipLibCheck": true,
+    "target": "es2022",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "moduleDetection": "force",
+    "isolatedModules": true,
+
+    "declaration": true,
     "inlineSourceMap": true,
     "inlineSources": true,
-    "lib": ["es2018", "es2019"],
-    "module": "commonjs",
-    "outDir": "./lib",
-    "strict": true,
-    "strictPropertyInitialization": false,
-    "target": "ES2018"
+
+    "verbatimModuleSyntax": false,
+
+    "module": "preserve",
+
+    "lib": [
+      "es2022"
+    ],
+    "outDir": "./lib"
   }
 }

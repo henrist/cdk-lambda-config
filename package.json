@@ -2,12 +2,13 @@
   "name": "@liflig/cdk-lambda-config",
   "version": "0.0.0-development",
   "description": "CDK Construct for adding config.json file to a Lambda Function",
+  "type": "module",
   "repository": {
     "type": "git",
     "url": "https://github.com/capralifecycle/cdk-lambda-config"
   },
   "scripts": {
-    "build": "rimraf dist && webpack && tsc",
+    "build": "rimraf dist && NODE_OPTIONS=--import=tsx webpack && tsc",
     "watch": "tsc -w",
     "test": "jest",
     "lint": "eslint .",
@@ -56,7 +57,7 @@
     "semantic-release": "24.2.0",
     "ts-jest": "29.2.5",
     "ts-loader": "9.5.1",
-    "ts-node": "10.9.2",
+    "tsx": "4.19.2",
     "typescript": "5.7.2",
     "webpack": "5.96.1",
     "webpack-cli": "5.1.4"
