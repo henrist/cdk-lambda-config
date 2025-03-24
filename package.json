@@ -45,7 +45,7 @@
     "aws-sdk": "2.1446.0",
     "axios": "1.8.2",
     "constructs": "10.4.2",
-    "eslint": "8.57.1",
+    "eslint": "9.23.0",
     "eslint-config-prettier": "8.10.0",
     "eslint-plugin-prettier": "4.2.1",
     "husky": "8.0.3",
