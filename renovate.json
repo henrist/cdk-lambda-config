@@ -6,7 +6,13 @@
   "packageRules": [
     {
       "description": "Create release for package updates that is part of the bundled code",
-      "packageNames": ["adm-zip", "aws-sdk", "axios", "typescript", "webpack"],
+      "matchPackageNames": [
+        "adm-zip",
+        "aws-sdk",
+        "axios",
+        "typescript",
+        "webpack"
+      ],
       "semanticCommitType": "fix"
     }
   ]
